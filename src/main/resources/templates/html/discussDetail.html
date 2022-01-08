@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://s.pc.qq.com/tousu/img/20211031/3840864_1635669892.jpg"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/global.css}" />
+    <link rel="stylesheet" th:href="@{/css/discuss-detail.css}" />
+    <title>帖子详情</title>
+</head>
+<body>
+<div class="nk-container">
+    <!-- 头部 -->
+    <header  th:replace="index::header">
+
+    </header>
+
+    <!-- 内容 -->
+    <div class="main">
+        <!-- 帖子详情 -->
+        <div class="container">
+            <!-- 标题 -->
+            <h6 class="mb-4">
+                <img  src="http://static.nowcoder.com/images/img/icons/ico-discuss.png"/>
+                <span th:utext="${post.title}">吧啦吧啦！</span>
+                <div class="float-right">
+                    <input type="hidden" id="postId" th:value="${post.id}">
+                    <button type="button" class="btn btn-danger btn-sm" id="topBtn"
+                            th:disabled="${post.type==1}" >置顶</button>
+                    <button type="button" class="btn btn-danger btn-sm" id="wonderfulBtn"
+                            th:disabled="${post.status==1}" >加精</button>
+                    <button type="button" class="btn btn-danger btn-sm" id="deleteBtn"
+                            th:disabled="${post.status==2}" >删除</button>
+                </div>
+            </h6>
+            <!-- 作者 -->
+            <div class="media pb-3 border-bottom">
+                <a href="profile.html">
+                    <img style="width: 50px;height: 50px" th:src="${user.headerUrl}" class="align-self-start mr-4 rounded-circle user-header" alt="用户头像" >
+                </a>
+                <div class="media-body">
+                    <div class="mt-0 text-warning" th:utext="${user.username}">寒江雪</div>
+                    <div class="text-muted mt-3">
+                        发布于 <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">2019-04-15 15:32:18</b>
+                        <ul class="d-inline float-right">
+                            <li class="d-inline ml-2">
+                                <a href="javascript:;" th:onclick="|like(this,1,${post.id},${post.userId},${post.id});|" class="text-primary">
+                                    <b >赞</b> <i>11</i>
+                                </a>
+                            </li>
+                            <li class="d-inline ml-2">|</li>
+                            <li class="d-inline ml-2"><a href="#replyform" class="text-primary">回帖 <i >7</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 正文 -->
+            <div class="mt-4 mb-3 content" th:utext="${post.content}">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 尾部 -->
+    <footer th:replace="index::footer"></footer>
+</div>
+<script src="http://cdn.staticfile.org/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script th:src="@{/js/global.js}"></script>
+<script th:src="@{/js/discuss.js}"></script>
+</body>
+</html>

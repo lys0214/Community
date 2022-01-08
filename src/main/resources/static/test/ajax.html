@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossOrigin="anonymous"></script>
+</head>
+<body>
+    <dvi>
+        <button onclick="send()">发送请求</button>
+    </dvi>
+</body>
+<script>
+
+    function send(){
+       $.post(
+           //访问路径
+           "/community/ajax",
+           //访问参数
+           {"name":"lys","age":"23"},
+           //回调函数
+           function (data) {
+               console.log(typeof (data))
+               console.log(data)
+               data=$.parseJSON(data)
+               console.log(typeof( data))
+               console.log(data.code)
+               console.log(data.msg)
+           }
+       )
+    }
+</script>
+</html>

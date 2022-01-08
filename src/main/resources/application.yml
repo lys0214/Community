@@ -1,0 +1,75 @@
+#配置端口号
+server:
+#  配置访问端口
+  port: 8080
+  servlet:
+#    配置访问根路径
+    context-path: /community
+
+  address: 0.0.0.0
+#    关闭thymeleaf缓存
+spring:
+  thymeleaf:
+    cache: false
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+      additional-exclude: src/main/java  #重启目录
+      exclude: templates/**
+  freemarker:
+    cache: false #页面不加载缓存，修改即时生效
+  #    配置数据库连接配置
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/community?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    #    配置数据库类型
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 5
+      idle-timeout: 30000
+
+  mvc:
+    static-path-pattern: /**
+  mail:
+    host: smtp.sina.com
+    port: 465
+    username: liyansheng1314@sina.cn
+    password: e8dbd21d6a231958
+    protocol: smtps
+  redis:
+    host: 127.0.0.1
+    password:
+    database: 0
+
+#      mybatis相关配置
+mybatis:
+  #  指定mapper路径
+  mapper-locations: classpath:mapper/*.xml
+#  指定实体列的别名
+  type-aliases-package: com.lys.community.entity
+  configuration:
+    use-generated-keys: true
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#配置地址
+
+community:
+  path:
+    domain:
+      http://localhost:8080
+    upload:
+      G:/my-work/data/upload
+#    开启日志
+#logging:
+#  level: debug
+#
+
+
+#
+
+
+

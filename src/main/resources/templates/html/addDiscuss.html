@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--	TODO:所有异步请求都要这样加,注意SecurityConfig中的代码.and().csrf().disable()要关闭-->
+    <!--访问该页面时,在此处生成CSRF令牌.-->
+    <!--	<meta name="_csrf" th:content="${_csrf.token}">-->
+    <!--	<meta name="_csrf_header" th:content="${_csrf.headerName}">-->
+    <link rel="icon" href="https://s.pc.qq.com/tousu/img/20211031/3840864_1635669892.jpg"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    <!--<link rel="stylesheet" th:href="@{/css/global.css}" />-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossOrigin="anonymous"></script>
+    <title>滑稽论坛-内容发表</title>
+</head>
+
+<body>
+    <div class="nk-container">
+        <!-- 头部 -->
+        <header class="badge-primary sticky-top" th:replace="index::header">
+
+        </header>
+
+        <!-- 内容 -->
+        <div class="main">
+            <div class="container">
+                <h3 class="btn-block">帖子发布：</h3>
+                <div>
+
+                    <h5>
+                        <label >标题：</label>
+                        <input name="title" type="text" maxlength="15" class="form-control" id="title"
+                               placeholder="给帖子起个标题吧...">
+                        <label >内容：</label>
+                        <textarea name="content" id="content" class="form-control" rows="3" placeholder="我要说点什么呢..." maxlength="50"></textarea>
+                        <br style="margin-bottom: 0.5cm;">
+                        <input type="reset" value="重置" class="btn-secondary" id="reset" onclick="reset()">
+                        <input type="button" value="我要发布" onclick="publish()" class="btn-primary" id="">
+                        <hr>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- 尾部 -->
+        <footer class="bg-primary" th:replace="index::footer">
+
+        </footer>
+    </div>
+</body>
+<script>
+    function reset(){
+
+    }
+    function publish(){
+    //    获取标题内容
+        var title=$("#title").val();
+        var content=$("#content").val();
+    //    发送异步请求
+        $.post(
+            "/community/add",
+            {"title":title, "content": content},
+            function (data){
+                data=$.parseJSON(data);
+            //    在提示框中显示返回消息
+                alert(data.msg);
+            //    定时刷新界面
+                setTimeout(function() {
+                    window.location.reload();
+                },2000)
+            }
+        )
+    }
+</script>
+</html>

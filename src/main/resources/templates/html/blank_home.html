@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>小黑屋</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        crossorigin="anonymous">
+  <style>
+    #div1,#div2{
+      width: 100%;
+      height: 350px;
+    }
+    #div2{
+      border: 10px dotted red;
+    }
+    table{
+      color:yellow;
+      width: 100%;
+    }
+    th{
+      background-color: red;
+    }
+  </style>
+</head>
+<body style="background-color: #1b1e21;text-align: center">
+<h1 style="color: lawngreen;margin-bottom: 1cm">
+    <a th:href="@{/index}" style="float: left">返回首页</a>
+    小黑屋</h1>
+<div class="container-fluid align-items-center">
+  <div class="row-fluid">
+    <div class="span12" >
+        <div style="border: 2px solid lawngreen" id="div1">
+        <!--    违规详情表格-->
+          <table border="1px solid yellow">
+              <tr>
+                <th> 序号</th>
+                <th> 用户 </th>
+                <th>违规情况</th>
+                <th>处理结果</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>张三</td>
+                <td>说脏话</td>
+                <td>禁言半个月</td>
+              </tr>
+          </table>
+        </div>
+    </div>
+    <h2 style="color: lawngreen">终生禁用</h2>
+    <div id="div2">
+      <h3 style="color: #9fcdff;margin-top: 2cm">开发中...敬请期待！</h3>
+    </div>
+  </div>
+</div>
+</body>
+</html>

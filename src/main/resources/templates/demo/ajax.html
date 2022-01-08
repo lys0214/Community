@@ -1,0 +1,75 @@
+<!--
+ * @Descripttion:
+ * @version: 1.0
+ * @Author: LiYansheng
+ * @Date: 2021-11-04 08:49:28
+ * @LastEditors: CoderXZ
+ * @LastEditTime: 2021-11-04 09:03:11
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <title>ajax异步请求demo</title>
+</head>
+
+<body>
+<div>
+  <div id="div1">
+    异步请求1
+  </div>
+  <button id="btn1">访问http://localhost:8080/community/hello</button>
+
+  <hr>
+  <div id="div2">
+    异步请求2
+  </div>
+  <button id="btn2">访问http://localhost:8080/community/s</button>
+
+  <hr>
+  <div id="div3">
+
+  </div>
+  <button id="btn3">访问http://localhost:8080/community/s</button>
+</div>
+</body>
+
+<script>
+  $(document).ready(function(){
+    $("#btn1").click(function(){
+      $.ajax({
+        url:"http://lys.free.idcfengye.com/community/hello",
+        success:function(result){
+          $("#div1").html(result);
+        }
+      })
+    })
+  });
+  $(document).ready(function(){
+    $("#btn2").click(function(){
+      $.ajax({
+        url:"http://lys.free.idcfengye.com/community/s",
+        success:function(result){
+          $("#div2").html(result);
+        }
+      })
+    })
+  });
+  $("#div3").load(
+          "http://lys.free.idcfengye.com/community/s",
+          function(response,status,xhr) {
+            if (status == "success") {
+              alert("加载内容成功！")
+            }
+            if (status == "error") {
+              alert("Error:"+xhr.status+":"+xhr.statusText)
+            }
+          }
+  )
+</script>
+
+</html>
